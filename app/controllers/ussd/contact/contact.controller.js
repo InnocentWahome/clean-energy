@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-unused-vars
 const { sms, ussd, menu } = require('../../../config/africastalking');
-const Model = require('../../../models/user.model');
+const ScheduleModel = require('../../../models/schedule.model');
 
 const dataToSave = {};
 
@@ -9,49 +9,81 @@ module.exports = async function helpController(req, res) {
   try {
     menu.state('entry-point-to-contact-controller', {
       run: () => {
-        menu.con('This is the contact controller'
-              + '\n1. Schedule a call back'
-              + '\n2. Read our FAQs'
-              + '\n3. About'
-              + '\n4. Subscriptions');
+        menu.con(
+          'We would love to discuss with you about the projects'
+            + '\n1. Schedule a call back'
+            + '\n2. Talk with a live agent'
+            + '\n3. Talk to max, our AI chatbot',
+        );
       },
       // next object links to next state based on user input
       next: {
-        1: 'entry-point-to-register-controller',
-        2: 'entry-point-to-help-controller',
-        3: 'entry-point-to-about-controller',
-        4: 'entry-point-to-subscriptions-controller',
+        1: 'schedule-a-callback',
+        2: 'live-agent',
+        3: 'talk-to-chatbot',
       },
     });
 
-    menu.state('end', {
-      run: async () => {
-        const tickets = menu.val;
-        dataToSave.tickets = tickets;
-        console.log(dataToSave);
-
-        // Save the data
-
-        const data = new Model({
-          name: dataToSave.name,
-          tickets: dataToSave.tickets,
-        });
-
-        const dataSaved = await data.save();
-        console.log(dataSaved);
-        const options = {
-          to: menu.args.phoneNumber,
-          message: `Hi ${dataToSave.name}, we've reserved ${dataToSave.tickets} tickets for you.`,
-        };
-        await sms.send(options);
-
-        menu.end(`Awesome! We have reserverd ${dataToSave.tickets} tickets for you mkubwa We have your tickets reserved. Sending a confirmation text shortly.`);
-      },
-    });
-
-    menu.state('quit', {
+    menu.state('schedule-a-callback', {
       run: () => {
-        menu.end('Goodbye :)');
+        menu.con(
+          'Please provide a date you are free to talk in this format YYYY-MM-DD',
+        );
+      },
+      // next object links to next state based on user input
+      next: {
+        '*[a-zA-Z]+': 'schedule-a-callback-time',
+      },
+    });
+
+    menu.state('schedule-a-callback-time', {
+      run: () => {
+        const date = menu.val;
+        dataToSave.date = date;
+        menu.con(
+          `Date: ${date} set.Please provide a time you are free to talk in this format 12:00PM`,
+        );
+      },
+      // next object links to next state based on user input
+      next: {
+        '*[a-zA-Z]+': 'finish-schedule-a-callback',
+      },
+    });
+
+    menu.state('finish-schedule-a-callback', {
+      run: async () => {
+        const time = menu.val;
+        dataToSave.time = time;
+
+        // send the data to the database
+        const data = new ScheduleModel({
+          date: dataToSave.date,
+          time: dataToSave.time,
+          phoneNumber: req.body.phoneNumber,
+        });
+        const dataSaved = await data.save();
+        console.log('dataSaved', dataSaved);
+
+        menu.end(
+          `Your schedule is set for, Date: ${dataToSave.date} and Time: ${time}. You will receive a text message confirming the schedule.`,
+        );
+        // TODO: send a text message to the user
+      },
+    });
+
+    menu.state('live-agent', {
+      run: () => {
+        menu.end(
+          'Our customer care number is 0745020416. One of our agents will call you from this number to assist you. Thank you for choosing us for your energy solutions.',
+        );
+      },
+    });
+
+    menu.state('talk-to-chatbot', {
+      run: () => {
+        menu.end(
+          'Here at Maximoff, we have a toll free, automated reply system. We call it Max. Max is a chatbot that will answer your questions. To talk to Max, please text the alphanumeric MAX. Thank you for choosing us for your energy solutions.',
+        );
       },
     });
     console.log('result');

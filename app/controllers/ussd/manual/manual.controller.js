@@ -43,9 +43,7 @@ module.exports = async function ManualController(req, res) {
         menu.con('Here at ........ we have a simple process for delivering projects to our clients'
               + '\n1. Back'
               + '\n2. Learn more'
-              + '\n3. End'
-              + '\n4. Our vision'
-              + '\n4. Want to partner with us?');
+              + '\n3. End');
       },
       // next object links to next state based on user input
       next: {
