@@ -1,130 +1,146 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-unused-vars
 const { sms, ussd, menu } = require('../../../config/africastalking');
-// const Model = require('../../../models/user.model');
 // eslint-disable-next-line no-unused-vars
-// const projectsList = require('../../../data/projects.json');
-const projectsList = [
-  {
-    name: 'Solar panels',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    startDate: '2022-10-01',
-    endData: '2023-01-01',
-    users: '12',
-    is_open: true,
-    imageUrl: 'https://source.unsplash.com/user/c_v_r/1600x900',
-    unique_id: '123456789',
-  },
-  {
-    name: 'Heat pumps',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    startDate: '2032-10-01',
-    endData: '2043-01-01',
-    users: '23',
-    is_open: false,
-    imageUrl: 'https://source.unsplash.com/user/c_v_r/1600x900',
-    unique_id: '5444343',
-  },
-  {
-    name: 'Wind turbines',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    startDate: '2022-10-01',
-    endData: '2023-01-01',
-    users: '12',
-    is_open: true,
-    imageUrl: 'https://source.unsplash.com/user/c_v_r/1600x900',
-    unique_id: '123456789',
-  },
-  {
-    name: 'Hydrogen',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    startDate: '2032-10-01',
-    endData: '2043-01-01',
-    users: '23',
-    is_open: false,
-    imageUrl: 'https://source.unsplash.com/user/c_v_r/1600x900',
-    unique_id: '5444343',
-  },
-  {
-    name: 'Batteries',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    startDate: '2022-10-01',
-    endData: '2023-01-01',
-    users: '12',
-    is_open: true,
-    imageUrl: 'https://source.unsplash.com/user/c_v_r/1600x900',
-    unique_id: '123456789',
-  }];
-
-// console.log(projectsList);
-
-// const dataToSave = {};
 
 module.exports = async function subscriptionsController(req, res) {
   try {
     menu.state('entry-point-to-projects-controller', {
-      // get all projects and display them in the menu
       run: async () => {
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < projectsList.length; i++) {
-          console.log(`here it is${i + 1}. ${projectsList[i].name}`);
-          menu.con('Here are the projects'
-          + `\n${i + 1}. ${projectsList[i].description}`);
-        }
-        // end of for loop
+        menu.con('Here are the projects available in your area'
+        + '\n1. Solar panels'
+        + '\n2. Heat pumps'
+        + '\n3. Wind turbines'
+        + '\n4. Electric cars'
+        + '\n5. Smart Homes');
       },
       // next object links to next state based on user input
       next: {
-        1: 'project-1',
-        2: 'project-2',
-        3: 'project-3',
-        4: 'project-4',
-        5: 'project-5',
+        1: 'solar-panels',
+        2: 'heat-pumps',
+        3: 'wind-turbines',
+        4: 'electric-cars',
+        5: 'smart-homes',
       },
     });
 
-    // display the details of the project selected in new states
+    menu.state('solar-panels', {
+      run: async () => {
+        menu.con('The solar panels project is a project that will help you save money on your electricity bill. Here is more information about it: '
+        + '\nStartDate: 2032-10-01'
+        + '\nEndDate:  2032-11-01'
+        + '\nRegistered Users: 12'
+        + '\nContact info. 0722 222 333'
+        + '\n'
+        + '\n1. Register for this project'
+        + '\n2. Go back to projects');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'new-project-subscription-solar-panels',
+        2: 'entry-point-to-projects-controller',
+      },
+    });
 
-    menu.state('project-1', {
-      run: () => {
-        menu.end(
-          `Name: ${projectsList[0].name}`
-            + `\nDescription: ${projectsList[0].description}`
-            + `\nStart date: ${projectsList[0].startDate}`
-            + `\nEnd date: ${projectsList[0].endData}`
-            + `\nUsers: ${projectsList[0].users}`
-            + `\nIs open: ${projectsList[0].is_open}`
-            + `\nImage url: ${projectsList[0].imageUrl}`
-            + `\nUnique id: ${projectsList[0].unique_id}`,
-        );
+    menu.state('heat-pumps', {
+      run: async () => {
+        menu.con('The heat pumps project is a project that will help you save money on your electricity bill. Here is more information about it: '
+        + '\nStartDate: 2032-10-01'
+        + '\nEndDate:  2032-11-01'
+        + '\nRegistered Users: 12'
+        + '\nContact info. 0723 432 657'
+        + '\n'
+        + '\n1. Register for this project'
+        + '\n2. Go back to projects');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'new-project-subscription-heat-pumps',
+        2: 'entry-point-to-projects-controller',
       },
     });
-    menu.state('project-2', {
-      run: () => {
-        menu.end(
-          `Name: ${projectsList[0].name}`
-            + `\nDescription: ${projectsList[0].description}`
-            + `\nStart date: ${projectsList[0].startDate}`
-            + `\nEnd date: ${projectsList[0].endData}`
-            + `\nUsers: ${projectsList[0].users}`
-            + `\nIs open: ${projectsList[0].is_open}`
-            + `\nImage url: ${projectsList[0].imageUrl}`
-            + `\nUnique id: ${projectsList[0].unique_id}`,
-        );
+
+    menu.state('wind-turbines', {
+      run: async () => {
+        menu.con('The wind turbines project is a project that will help you save money on your electricity bill. Here is more information about it: '
+        + '\nStartDate: 2032-10-01'
+        + '\nEndDate:  2032-11-01'
+        + '\nRegistered Users: 12'
+        + '\nContact info. 0719 222 222'
+        + '\n'
+        + '\n1. Register for this project'
+        + '\n2. Go back to projects');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'new-project-subscription-wind-turbines',
+        2: 'entry-point-to-projects-controller',
       },
     });
-    menu.state('project-3', {
-      run: () => {
-        menu.end(
-          `Name: ${projectsList[0].name}`
-            + `\nDescription: ${projectsList[0].description}`
-            + `\nStart date: ${projectsList[0].startDate}`
-            + `\nEnd date: ${projectsList[0].endData}`
-            + `\nUsers: ${projectsList[0].users}`
-            + `\nIs open: ${projectsList[0].is_open}`
-            + `\nImage url: ${projectsList[0].imageUrl}`
-            + `\nUnique id: ${projectsList[0].unique_id}`,
-        );
+
+    menu.state('electric-cars', {
+      run: async () => {
+        menu.con('The electric cars project is a project that will help you save money on your electricity bill. Here is more information about it: '
+        + '\nStartDate: 2032-10-01'
+        + '\nEndDate:  2032-11-01'
+        + '\nRegistered Users: 12'
+        + '\nContact info. 0798 765 432'
+        + '\n'
+        + '\n1. Register for this project'
+        + '\n2. Go back to projects');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'new-project-subscription-electric-cars',
+        2: 'entry-point-to-projects-controller',
+      },
+    });
+
+    menu.state('smart-homes', {
+      run: async () => {
+        menu.con('The smart homes project is a project that will help you save money on your electricity bill. Here is more information about it: '
+        + '\nStartDate: 2032-10-01'
+        + '\nEndDate:  2032-11-01'
+        + '\nRegistered Users: 12'
+        + '\nContact info. 0712 345 678'
+        + '\n'
+        + '\n1. Register for this project'
+        + '\n2. Go back to projects');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'new-project-subscription-smart-homes',
+        2: 'entry-point-to-projects-controller',
+      },
+    });
+
+    menu.state('new-project-subscription-smart-homes', {
+      run: async () => {
+        menu.end('You have successfully subscribed to the smart homes project. You will receive a confirmation message shortly.');
+      },
+    });
+
+    menu.state('new-project-subscription-electric-cars', {
+      run: async () => {
+        menu.end('You have successfully subscribed to the electric cars project. You will receive a confirmation message shortly.');
+      },
+    });
+
+    menu.state('new-project-subscription-wind-turbines', {
+      run: async () => {
+        menu.end('You have successfully subscribed to the wind turbines project. You will receive a confirmation message shortly.');
+      },
+    });
+
+    menu.state('new-project-subscription-heat-pumps', {
+      run: async () => {
+        menu.end('You have successfully subscribed to the heat pumps project. You will receive a confirmation message shortly.');
+      },
+    });
+
+    menu.state('new-project-subscription-solar-panels', {
+      run: async () => {
+        menu.end('You have successfully subscribed to the solar panels project. You will receive a confirmation message shortly.');
       },
     });
 
