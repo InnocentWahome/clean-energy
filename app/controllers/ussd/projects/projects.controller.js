@@ -130,12 +130,6 @@ module.exports = async function subscriptionsController(req, res) {
 
     const resMsg = await menu.run(req.body);
     res.send(resMsg);
-
-    // menu.run(req.body, (ussdResult) => {
-    //   if (ussdResult) {
-    //     res.send(ussdResult);
-    //   }
-    // });
   } catch (error) {
     console.error(error);
   }
