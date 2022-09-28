@@ -6,7 +6,7 @@ const { sms, ussd, menu } = require('../../../config/africastalking');
 // const projectsList = require('../../../data/projects.json');
 const projectsList = [
   {
-    name: 'Solar panelsss',
+    name: 'Solar panels',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
     startDate: '2022-10-01',
     endData: '2023-01-01',
@@ -57,18 +57,19 @@ const projectsList = [
   }];
 
 // console.log(projectsList);
-for (let i = 0; i < projectsList.length; i += 1) {
-  console.log(`${i + 1}. ${projectsList[i].name}`);
-}
+
 // const dataToSave = {};
 
 module.exports = async function subscriptionsController(req, res) {
   try {
     menu.state('entry-point-to-projects-controller', {
       // get all projects and display them in the menu
-      run: () => {
-        for (let i = 0; i < projectsList.length; i += 1) {
-          menu.con(`${i + 1}: ${projectsList[i].name}`, `${i + 1}: ${projectsList[i].name}`);
+      run: async () => {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < projectsList.length; i++) {
+          console.log(`here it is${i + 1}. ${projectsList[i].name}`);
+          menu.con('Here are the projects'
+          + `\n${i + 1}. ${projectsList[i].description}`);
         }
         // end of for loop
       },
