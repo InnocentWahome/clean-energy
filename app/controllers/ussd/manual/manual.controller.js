@@ -7,34 +7,17 @@ module.exports = async function ManualController(req, res) {
     menu.state('entry-point-to-manual-controller', {
       run: () => {
         menu.con('Here you can get more information about the following services we offer'
-              + '\n1. Our project delivery system'
-              + '\n2. How it works'
-              + '\n3. Our mission'
-              + '\n4. Our vision'
-              + '\n5. Want to partner with us?');
+              + '\n1. How it works'
+              + '\n2. Our mission'
+              + '\n3. Our vision'
+              + '\n4. Want to partner with us?');
       },
       // next object links to next state based on user input
       next: {
-        1: 'project-delivery-system',
-        2: 'how-it-works',
-        3: 'our-mission',
-        4: 'our-vision',
-        5: 'partner-with-us',
-      },
-    });
-
-    menu.state('project-delivery-system', {
-      run: () => {
-        menu.con('Text test text'
-              + '\n0. Back'
-              + '\n1. Contact us with a question'
-              + '\n2. End');
-      },
-      // next object links to next state based on user input
-      next: {
-        0: 'entry-point-to-manual-controller',
-        1: 'entry-point-to-contact-controller',
-        2: 'quit-manual-controller',
+        1: 'how-it-works',
+        2: 'our-mission',
+        3: 'our-vision',
+        4: 'partner-with-us',
       },
     });
 
@@ -43,9 +26,7 @@ module.exports = async function ManualController(req, res) {
         menu.con(' We do this by giving innovators a chance to showcase their solutions in either Affordable Housing or Manufacturing or more.  '
               + '\n1. Back'
               + '\n2. Learn more'
-              + '\n3. End'
-              + '\n4. Our vision'
-              + '\n4. Want to partner with us?');
+              + '\n3. End');
       },
       // next object links to next state based on user input
       next: {
@@ -57,37 +38,14 @@ module.exports = async function ManualController(req, res) {
 
     menu.state('our-mission', {
       run: () => {
-        menu.con('Our mission at Maximoff is to provide a data intermediary solutions to improve the quality of clean energy implementation.'
-              + '\n1. Our project delivery system'
-              + '\n2. How it works'
-              + '\n3. Our mission'
-              + '\n4. Our vision'
-              + '\n4. Want to partner with us?');
+        menu.end('Our mission at Maximoff is to provide a data intermediary solutions to improve the quality of clean energy implementation.');
       },
-      // next object links to next state based on user input
-      next: {
-        1: 'project-delivery-system',
-        2: 'how-it-works',
-        3: 'our-mission',
-        4: 'partner-with-us',
-      },
+      // n
     });
 
     menu.state('our-vision', {
       run: () => {
-        menu.con('Our Vission at maximoff is to empower upcoming energy solutions. '
-              + '\n1. Our project delivery system'
-              + '\n2. How it works'
-              + '\n3. Our mission'
-              + '\n4. Our vision'
-              + '\n4. Want to partner with us?');
-      },
-      // next object links to next state based on user input
-      next: {
-        1: 'project-delivery-system',
-        2: 'how-it-works',
-        3: 'our-mission',
-        4: 'partner-with-us',
+        menu.end('Our Vision at Maximoff is to empower upcoming energy solutions. ');
       },
     });
 
