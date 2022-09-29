@@ -62,7 +62,11 @@ module.exports = async function registerController(req, res) {
 
         const dataSaved = await data.save();
         console.log('dataSaved', dataSaved);
-
+        const options = {
+          to: menu.args.phoneNumber,
+          message: `Hi ${dataToSave.name}, you have successfully registered your account. Your login email is ${dataToSave.email}`,
+        };
+        await sms.send(options);
         menu.end('You will receive a confirmation text from us shortly. Thank you for registering with us.');
       },
     });

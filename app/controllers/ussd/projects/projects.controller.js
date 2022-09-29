@@ -7,12 +7,14 @@ module.exports = async function subscriptionsController(req, res) {
   try {
     menu.state('entry-point-to-projects-controller', {
       run: async () => {
-        menu.con('Here are the projects available in your area'
-        + '\n1. Solar panels'
-        + '\n2. Heat pumps'
-        + '\n3. Wind turbines'
-        + '\n4. Electric cars'
-        + '\n5. Smart Homes');
+        menu.con(
+          'Here are the projects available in your area'
+            + '\n1. Solar panels'
+            + '\n2. Heat pumps'
+            + '\n3. Wind turbines'
+            + '\n4. Electric cars'
+            + '\n5. Smart Homes',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -26,14 +28,16 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('solar-panels', {
       run: async () => {
-        menu.con('The solar panels project is a project that will help you save money on your electricity bill. Here is more information about it: '
-        + '\nStartDate: 2032-10-01'
-        + '\nEndDate:  2032-11-01'
-        + '\nRegistered Users: 12'
-        + '\nContact info. 0722 222 333'
-        + '\n'
-        + '\n1. Register for this project'
-        + '\n2. Go back to projects');
+        menu.con(
+          'The solar panels project is a project that will help you save money on your electricity bill. Here is more information about it: '
+            + '\nStartDate: 2032-10-01'
+            + '\nEndDate:  2032-11-01'
+            + '\nRegistered Users: 12'
+            + '\nContact info. 0722 222 333'
+            + '\n'
+            + '\n1. Register for this project'
+            + '\n2. Go back to projects',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -44,14 +48,16 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('heat-pumps', {
       run: async () => {
-        menu.con('The heat pumps project is a project that will help you save money on your electricity bill. Here is more information about it: '
-        + '\nStartDate: 2032-10-01'
-        + '\nEndDate:  2032-11-01'
-        + '\nRegistered Users: 12'
-        + '\nContact info. 0723 432 657'
-        + '\n'
-        + '\n1. Register for this project'
-        + '\n2. Go back to projects');
+        menu.con(
+          'The heat pumps project is a project that will help you save money on your electricity bill. Here is more information about it: '
+            + '\nStartDate: 2032-10-01'
+            + '\nEndDate:  2032-11-01'
+            + '\nRegistered Users: 12'
+            + '\nContact info. 0723 432 657'
+            + '\n'
+            + '\n1. Register for this project'
+            + '\n2. Go back to projects',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -62,14 +68,16 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('wind-turbines', {
       run: async () => {
-        menu.con('The wind turbines project is a project that will help you save money on your electricity bill. Here is more information about it: '
-        + '\nStartDate: 2032-10-01'
-        + '\nEndDate:  2032-11-01'
-        + '\nRegistered Users: 12'
-        + '\nContact info. 0719 222 222'
-        + '\n'
-        + '\n1. Register for this project'
-        + '\n2. Go back to projects');
+        menu.con(
+          'The wind turbines project is a project that will help you save money on your electricity bill. Here is more information about it: '
+            + '\nStartDate: 2032-10-01'
+            + '\nEndDate:  2032-11-01'
+            + '\nRegistered Users: 12'
+            + '\nContact info. 0719 222 222'
+            + '\n'
+            + '\n1. Register for this project'
+            + '\n2. Go back to projects',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -80,14 +88,16 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('electric-cars', {
       run: async () => {
-        menu.con('The electric cars project is a project that will help you save money on your electricity bill. Here is more information about it: '
-        + '\nStartDate: 2032-10-01'
-        + '\nEndDate:  2032-11-01'
-        + '\nRegistered Users: 12'
-        + '\nContact info. 0798 765 432'
-        + '\n'
-        + '\n1. Register for this project'
-        + '\n2. Go back to projects');
+        menu.con(
+          'The electric cars project is a project that will help you save money on your electricity bill. Here is more information about it: '
+            + '\nStartDate: 2032-10-01'
+            + '\nEndDate:  2032-11-01'
+            + '\nRegistered Users: 12'
+            + '\nContact info. 0798 765 432'
+            + '\n'
+            + '\n1. Register for this project'
+            + '\n2. Go back to projects',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -98,14 +108,16 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('smart-homes', {
       run: async () => {
-        menu.con('The smart homes project is a project that will help you save money on your electricity bill. Here is more information about it: '
-        + '\nStartDate: 2032-10-01'
-        + '\nEndDate:  2032-11-01'
-        + '\nRegistered Users: 12'
-        + '\nContact info. 0712 345 678'
-        + '\n'
-        + '\n1. Register for this project'
-        + '\n2. Go back to projects');
+        menu.con(
+          'The smart homes project is a project that will help you save money on your electricity bill. Here is more information about it: '
+            + '\nStartDate: 2032-10-01'
+            + '\nEndDate:  2032-11-01'
+            + '\nRegistered Users: 12'
+            + '\nContact info. 0712 345 678'
+            + '\n'
+            + '\n1. Register for this project'
+            + '\n2. Go back to projects',
+        );
       },
       // next object links to next state based on user input
       next: {
@@ -116,31 +128,70 @@ module.exports = async function subscriptionsController(req, res) {
 
     menu.state('new-project-subscription-smart-homes', {
       run: async () => {
-        menu.end('You have successfully subscribed to the smart homes project. You will receive a confirmation message shortly.');
+        const options = {
+          to: menu.args.phoneNumber,
+          message: 'Welcome to Smart Homes project, we are excited to have you on board. The project start on 10-10-2022 and ends 12-12-2022. \n. You can visit the project website at https://smart.com.\n If you have any new questions, please contact us at 0733 333 333',
+        };
+        await sms.send(options);
+        menu.end(
+          'You have successfully subscribed to the smart homes project. You will receive a confirmation message shortly.',
+        );
       },
     });
 
     menu.state('new-project-subscription-electric-cars', {
       run: async () => {
-        menu.end('You have successfully subscribed to the electric cars project. You will receive a confirmation message shortly.');
+        const options = {
+          to: menu.args.phoneNumber,
+          message:
+            'Welcome to Smart Electric Cars project, we are excited to have you on board. The project start on 10-10-2022 and ends 12-12-2022. \n. You can visit the project website at https://smart.com.\n If you have any new questions, please contact us at 0733 333 333',
+        };
+        await sms.send(options);
+        menu.end(
+          'You have successfully subscribed to the electric cars project. You will receive a confirmation message shortly.',
+        );
       },
     });
 
     menu.state('new-project-subscription-wind-turbines', {
       run: async () => {
-        menu.end('You have successfully subscribed to the wind turbines project. You will receive a confirmation message shortly.');
+        const options = {
+          to: menu.args.phoneNumber,
+          message:
+            'Welcome to the wind Turbines project, we are excited to have you on board. The project start on 10-10-2022 and ends 12-12-2022. \n. You can visit the project website at https://smart.com.\n If you have any new questions, please contact us at 0733 333 333',
+        };
+        await sms.send(options);
+        menu.end(
+          'You have successfully subscribed to the wind turbines project. You will receive a confirmation message shortly.',
+        );
       },
     });
 
     menu.state('new-project-subscription-heat-pumps', {
       run: async () => {
-        menu.end('You have successfully subscribed to the heat pumps project. You will receive a confirmation message shortly.');
+        const options = {
+          to: menu.args.phoneNumber,
+          message:
+            'Welcome to the Heat pumps project, we are excited to have you on board. The project start on 10-10-2022 and ends 12-12-2022. \n. You can visit the project website at https://smart.com.\n If you have any new questions, please contact us at 0733 333 333',
+        };
+        await sms.send(options);
+        menu.end(
+          'You have successfully subscribed to the heat pumps project. You will receive a confirmation message shortly.',
+        );
       },
     });
 
     menu.state('new-project-subscription-solar-panels', {
       run: async () => {
-        menu.end('You have successfully subscribed to the solar panels project. You will receive a confirmation message shortly.');
+        const options = {
+          to: menu.args.phoneNumber,
+          message:
+            'Welcome to the Solar Panels project, we are excited to have you on board. The project start on 10-10-2022 and ends 12-12-2022. \n. You can visit the project website at https://smart.com.\n If you have any new questions, please contact us at 0733 333 333',
+        };
+        await sms.send(options);
+        menu.end(
+          'You have successfully subscribed to the solar panels project. You will receive a confirmation message shortly.',
+        );
       },
     });
 

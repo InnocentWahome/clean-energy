@@ -63,7 +63,12 @@ module.exports = async function helpController(req, res) {
         });
         const dataSaved = await data.save();
         console.log('dataSaved', dataSaved);
-
+        const options = {
+          to: menu.args.phoneNumber,
+          message: `Hi there, we've reserved date: ${dataToSave.date} and time: ${dataToSave.time} for you. See you then`,
+        };
+        await sms.send(options);
+        console.log('sms sent');
         menu.end(
           `Your schedule is set for, Date: ${dataToSave.date} and Time: ${time}. You will receive a text message confirming the schedule.`,
         );
