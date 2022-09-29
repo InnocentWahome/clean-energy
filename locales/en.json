@@ -1,1 +1,20 @@
-{}
+{
+  "AppController": {
+    "HeadingText": "Welcome to Maximoff Energy Solutions.",
+    "Option1": "Get Started",
+    "Option2": "Projects in your areas",
+    "Option3":"My subscriptions",
+    "Option4": "Contact us",
+    "Option5": "Maximoff Manual"
+  },
+  "ContactController": {
+    "HeadingText": "We would love to discuss with you about the projects",
+    "Option1": "Schedule a callback",
+    "Option2": "Talk with a live agent",
+    "Option3":"Talk to max, our AI chatbot",
+    "ScheduleACallbackHeading":"Please provide a date you are free to talk in this format YYYY-MM-DD",
+    "LiveAgentText": "Our customer care number is 0745020416. One of our agents will call you from this number to assist you. Thank you for choosing us for your energy solutions",
+    "ChatbotText": "Here at Maximoff, we have a toll free, automated reply system. We call it Max. Max is a chatbot that will answer your questions. To talk to Max, please text the alphanumeric MAX. Thank you for choosing us for your energy solutions."
+  }
+}
+

@@ -7,6 +7,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
+const { I18n } = require('i18n');
+const path = require('path');
+
 // const { sms } = require('./config/africastalking');
 
 // database configurations
@@ -30,8 +33,24 @@ app.use(session({
   cookie: { secure: true },
 }));
 
+const i18n = new I18n({
+  locales: ['en', 'sw'],
+  directory: path.join(__dirname, 'locales'),
+});
+/**
+ * later in code configure
+ */
+app.use(i18n.init);
+
+i18n.configure({
+  locales: ['en', 'sw'],
+  directory: path.join(__dirname, '/locales'),
+  // you may alter a site wide default locale
+  defaultLocale: 'en',
+});
 // Default server port
 app.get('/', (req, res) => {
+  i18n.init(req, res);
   res.send('Your server is running');
 });
 

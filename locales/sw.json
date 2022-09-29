@@ -1,1 +1,20 @@
-{}
+{
+  "AppController": {
+    "HeadingText": "Karibu kwa Maximoff Energy Solutions.",
+    "Option1": "Mwanzo",
+    "Option2": "Sera karibu na wewe",
+    "Option3":"Subscriptions zako",
+    "Option4": "Ongea nasi",
+    "Option5": "Kielelezo cha Maximoff"
+  },
+  "ContactController": {
+    "HeadingText": "Tungependa kuongea nawe kuhusu sera zetu",
+    "Option1": "Panga kuongea nasi",
+    "Option2": "Ongea na mtumwa wetu",
+    "Option3":"Ongea na MAX, chatboti yetu",
+    "ScheduleACallbackHeading":"Andika tarehe unaweza patikana YYYY-MM-DD",
+    "LiveAgentText": "Nambari yetu ya mtumwa ni 0723341234. Tutakupiga baadaye",
+    "ChatbotText": ""
+  }
+}
+
