@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 const { sms, ussd, menu } = require('../../../config/africastalking');
 
+const dataToSave = {};
 module.exports = async function ManualController(req, res) {
   try {
     menu.state('entry-point-to-manual-controller', {
@@ -51,19 +52,26 @@ module.exports = async function ManualController(req, res) {
 
     menu.state('partner-with-us', {
       run: () => {
-        menu.con('Here you can get more information about the following services we offer. '
-              + '\n1. Our project delivery system'
-              + '\n2. How it works'
-              + '\n3. Our mission'
-              + '\n4. Our vision'
-              + '\n4. Want to partner with us?');
+        menu.con('Please tell us about your project');
       },
       // next object links to next state based on user input
       next: {
-        1: 'project-delivery-system',
-        2: 'how-it-works',
-        3: 'our-mission',
-        4: 'partner-with-us',
+        '*[a-zA-Z]+': 'contact-project-owner',
+      },
+    });
+
+    menu.state('contact-project-owner', {
+      run: () => {
+        const name = menu.val;
+        dataToSave.name = name;
+        menu.con('Awesome. We would love to talk about your project with you.'
+        + '\n1. Contact me'
+        + '\n2  Quit');
+      },
+      // next object links to next state based on user input
+      next: {
+        1: 'entry-point-to-contact-controller',
+        2: 'quit-manual-controller',
       },
     });
 

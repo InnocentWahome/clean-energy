@@ -87,7 +87,7 @@ module.exports = async function helpController(req, res) {
     menu.state('talk-to-chatbot', {
       run: () => {
         menu.end(
-          'Here at Maximoff, we have a toll free, automated reply system. We call it Max. Max is a chatbot that will answer your questions. To talk to Max, please text the alphanumeric MAX. Thank you for choosing us for your energy solutions.',
+          'Here at Maximoff, we have a toll free, automated reply system. We call it Max. Max is a chatbot that will answer your questions. To talk to Max, please text the shortcode 23881. Thank you for choosing us for your energy solutions.',
         );
       },
     });
