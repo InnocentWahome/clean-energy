@@ -6,14 +6,12 @@ require('dotenv/config');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const session = require('express-session');
-
+const { sms } = require('./config/africastalking');
 // database configurations
 require('./config/database')(mongoose);
 
 // send sms server
-// const chatbotSMS = require('./controllers/sms/chatbot.controller');
-const AppController = require('./controllers/ussd/app.controller');
+const chatbotSMS = require('./controllers/sms/chatbot.controller');
 
 // initializing the app
 const app = express();
@@ -22,36 +20,46 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true },
-}));
 
 // Default server port
 app.get('/', (req, res) => {
   res.send('Your server is running');
 });
 
-// routes
-// app.use('/', AppRoutes);
-
-// entry point to current ussd app using ussd-builder states and menus
-app.post('/ussd', (req, res) => {
-  // eslint-disable-next-line no-unused-vars
+let data1 = {};
+// listen for incoming messagesW
+// after running the server, set ngrok callback url with this route
+app.post('/incoming-messages', (req, res) => {
   const data = req.body;
-  AppController(req, res);
+  data1 = req.body;
+  console.log('this is what im looing for', data1);
+  console.log('Received message', data);
+  console.log('Here is the body of the text:', data.text);
+  chatbotSMS(req, res);
+  // this response is required by Africa's Talking
+  console.log('finished here');
+  res.sendStatus(200);
 });
+console.log('what happens next', data1);
+
+if (data1.text === 'wahome') {
+  try {
+    console.log('sending new sms');
+    const result = sms.send({
+      to: data1.from,
+      message: 'Hey AT Ninja! Wassup.. This has been called after receiving wahome text.',
+      from: data1.to,
+    });
+    console.log(result);
+  } catch (ex) {
+    console.error(ex);
+  }
+}
 
 // // listen for incoming messages
-// // after running the server, set ngrok callback url with this route
-// app.post('/incoming-messages', (req, res) => {
+// app.post('/delivery-reports', (req, res) => {
 //   const data = req.body;
-//   console.log('Received message', data);
-//   console.log('Here is the body of the text:', data.text);
-//   chatbotSMS();
-//   // this response is required by Africa's Talking
+//   console.log('Received report: \n ', data);
 //   res.sendStatus(200);
 // });
 
